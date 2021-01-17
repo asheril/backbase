@@ -4,3 +4,8 @@ import * as fromTransactions from './transactions.reducer';
 export const selectTransactionsState = createFeatureSelector<fromTransactions.State>(
   fromTransactions.transactionsFeatureKey
 );
+
+export const selectTransactions = createSelector(
+  selectTransactionsState,
+  ({ transactions }: fromTransactions.State) => transactions
+);

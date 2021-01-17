@@ -1,5 +1,9 @@
 import * as fromTransactions from './transactions.reducer';
-import { selectTransactionsState } from './transactions.selectors';
+import {
+  selectTransactions,
+  selectTransactionsState,
+} from './transactions.selectors';
+import { Transaction } from '../models';
 
 describe('Transactions Selectors', () => {
   it('should select the feature state', () => {
@@ -8,5 +12,17 @@ describe('Transactions Selectors', () => {
     });
 
     expect(result).toEqual({ transactions: [] });
+  });
+
+  it('should select transactions', () => {
+    const transactions = [<Transaction>{}];
+    const result = selectTransactions({
+      [fromTransactions.transactionsFeatureKey]: {
+        ...fromTransactions.initialState,
+        transactions,
+      },
+    });
+
+    expect(result).toEqual(transactions);
   });
 });

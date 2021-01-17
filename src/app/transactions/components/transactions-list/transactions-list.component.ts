@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { State } from '../../../reducers';
-import { Store } from '@ngrx/store';
-import { loadTransactions } from '../../store/transactions.actions';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Transaction } from '../../models';
 
 @Component({
   selector: 'app-transactions-list',
@@ -9,10 +7,6 @@ import { loadTransactions } from '../../store/transactions.actions';
   styleUrls: ['./transactions-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionsListComponent implements OnInit {
-  constructor(private store: Store<State>) {}
-
-  ngOnInit(): void {
-    this.store.dispatch(loadTransactions());
-  }
+export class TransactionsListComponent {
+  @Input() transactions: Transaction[];
 }
