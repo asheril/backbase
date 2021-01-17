@@ -4,9 +4,9 @@ import { selectTransactionsState } from './transactions.selectors';
 describe('Transactions Selectors', () => {
   it('should select the feature state', () => {
     const result = selectTransactionsState({
-      [fromTransactions.transactionsFeatureKey]: {},
+      [fromTransactions.transactionsFeatureKey]: fromTransactions.initialState,
     });
 
-    expect(result).toEqual({});
+    expect(result).toEqual({ transactions: [] });
   });
 });
