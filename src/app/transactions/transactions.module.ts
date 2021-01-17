@@ -9,6 +9,14 @@ import { TransactionsEffects } from './store/transactions.effects';
 
 @NgModule({
   declarations: [TransactionsListComponent],
-  imports: [CommonModule, TransactionsRoutingModule, StoreModule.forFeature(fromTransactions.transactionsFeatureKey, fromTransactions.reducer), EffectsModule.forFeature([TransactionsEffects])]
+  imports: [
+    CommonModule,
+    TransactionsRoutingModule,
+    StoreModule.forFeature(
+      fromTransactions.transactionsFeatureKey,
+      fromTransactions.reducer
+    ),
+    EffectsModule.forFeature([TransactionsEffects]),
+  ],
 })
 export class TransactionsModule {}
