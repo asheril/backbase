@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "backbase"
+  "defaultProject": "backbase",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
