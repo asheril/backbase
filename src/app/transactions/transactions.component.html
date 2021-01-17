@@ -3,6 +3,15 @@
   (changed)="searchByPhrase($event)"
 ></app-search-input>
 
+<app-sorting-bar
+  [activeId]="currentSorter$ | async"
+  (changed)="searchBySorter($event)"
+>
+  <app-sorting-button [id]="sorter.Date">date</app-sorting-button>
+  <app-sorting-button [id]="sorter.Beneficiary">beneficiary</app-sorting-button>
+  <app-sorting-button [id]="sorter.Amount">amount</app-sorting-button>
+</app-sorting-bar>
+
 <app-transactions-list
   [transactions]="transactions$ | async"
 ></app-transactions-list>

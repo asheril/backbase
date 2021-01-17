@@ -4,13 +4,15 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { loadTransactions, searchByPhrase } from './store/transactions.actions';
 import { MockComponent } from 'ng-mocks';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
-import { Transaction } from './models';
+import { Sorter, Transaction } from './models';
 import {
+  selectCurrentSorter,
   selectSearchPhrase,
   selectTransactions,
 } from './store/transactions.selectors';
 import { By } from '@angular/platform-browser';
 import { SearchInputComponent } from './components/search-input/search-input.component';
+import { SortingBarComponent } from './components/sorting-bar/sorting-bar.component';
 
 describe('TransactionsComponent', () => {
   let component: TransactionsComponent;
@@ -24,6 +26,7 @@ describe('TransactionsComponent', () => {
         TransactionsComponent,
         MockComponent(TransactionsListComponent),
         MockComponent(SearchInputComponent),
+        MockComponent(SortingBarComponent),
       ],
       providers: [provideMockStore()],
     }).compileComponents();
@@ -35,6 +38,7 @@ describe('TransactionsComponent', () => {
     transactions = [<Transaction>{}];
     store.overrideSelector(selectTransactions, transactions);
     store.overrideSelector(selectSearchPhrase, 'phrase');
+    store.overrideSelector(selectCurrentSorter, Sorter.Amount);
     spyOn(store, 'dispatch');
     component = fixture.componentInstance;
     fixture.detectChanges();

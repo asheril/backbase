@@ -14,3 +14,8 @@ export const selectSearchPhrase = createSelector(
   selectTransactionsState,
   ({ phrase }: fromTransactions.State) => phrase
 );
+
+export const selectCurrentSorter = createSelector(
+  selectTransactionsState,
+  ({ sorter }: fromTransactions.State) => sorter
+);

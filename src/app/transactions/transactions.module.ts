@@ -10,6 +10,8 @@ import { TransactionsListComponent } from './components/transactions-list/transa
 import { TransactionsListRowComponent } from './components/transactions-list-row/transactions-list-row.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SortingBarComponent } from './components/sorting-bar/sorting-bar.component';
+import { SortingButtonComponent } from './components/sorting-button/sorting-button.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TransactionsListComponent,
     TransactionsListRowComponent,
     SearchInputComponent,
+    SortingBarComponent,
+    SortingButtonComponent,
   ],
   imports: [
     CommonModule,

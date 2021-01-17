@@ -19,7 +19,10 @@ import {
   loadTransactionsSuccess,
 } from './transactions.actions';
 import { State } from '../../reducers';
-import { selectSearchPhrase } from './transactions.selectors';
+import {
+  selectCurrentSorter,
+  selectSearchPhrase,
+} from './transactions.selectors';
 
 @Injectable()
 export class TransactionsEffects {
@@ -33,12 +36,17 @@ export class TransactionsEffects {
     (): Observable<Action> => {
       return this.actions$.pipe(
         ofType(TransactionsActions.loadTransactions),
-        withLatestFrom(this.store.select(selectSearchPhrase)),
-        switchMap(([, searchPhrase]) =>
-          this.transactionsService.getTransactions(searchPhrase).pipe(
-            map((transactions) => loadTransactionsSuccess({ transactions })),
-            catchError(() => of(loadTransactionsFailure()))
-          )
+        withLatestFrom(
+          this.store.select(selectSearchPhrase),
+          this.store.select(selectCurrentSorter)
+        ),
+        switchMap(([, searchPhrase, currentSorter]) =>
+          this.transactionsService
+            .getTransactions(searchPhrase, currentSorter)
+            .pipe(
+              map((transactions) => loadTransactionsSuccess({ transactions })),
+              catchError(() => of(loadTransactionsFailure()))
+            )
         )
       );
     }
@@ -48,6 +56,15 @@ export class TransactionsEffects {
     (): Observable<Action> => {
       return this.actions$.pipe(
         ofType(TransactionsActions.searchByPhrase),
+        mapTo(loadTransactions())
+      );
+    }
+  );
+
+  searchBySorter$ = createEffect(
+    (): Observable<Action> => {
+      return this.actions$.pipe(
+        ofType(TransactionsActions.sortBySorter),
         mapTo(loadTransactions())
       );
     }

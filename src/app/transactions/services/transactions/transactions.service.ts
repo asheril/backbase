@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Transaction } from '../../models';
+import { Sorter, Transaction } from '../../models';
 
 const transactionsUrl = 'data';
 
@@ -11,11 +11,45 @@ const transactionsUrl = 'data';
 export class TransactionsService {
   constructor(private httpClient: HttpClient) {}
 
-  getTransactions(phrase: string): Observable<Transaction[]> {
-    return this.httpClient.get<Transaction[]>(this.urlWithFiltering(phrase));
+  getTransactions(phrase: string, sorter: Sorter): Observable<Transaction[]> {
+    return this.httpClient.get<Transaction[]>(
+      this.urlWithFiltering(phrase, sorter)
+    );
   }
 
-  private urlWithFiltering(phrase: string): string {
-    return phrase === null ? transactionsUrl : `${transactionsUrl}?q=${phrase}`;
+  private urlWithFiltering(phrase: string, sorter: Sorter): string {
+    const fragments = [
+      this.phraseFragment(phrase),
+      this.sorterFragment(sorter),
+    ].filter((fragment) => fragment !== null);
+
+    return fragments.length
+      ? `${transactionsUrl}?${fragments.join('&')}`
+      : transactionsUrl;
+  }
+
+  private phraseFragment(phrase: string): string {
+    if (phrase === null) {
+      return null;
+    }
+
+    return `q=${phrase}`;
+  }
+
+  private sorterFragment(sorter: Sorter): string {
+    if (sorter === null) {
+      return null;
+    }
+
+    switch (sorter) {
+      case Sorter.Amount:
+        return '_sort=transaction.amountCurrency.amount';
+      case Sorter.Beneficiary:
+        return '_sort=transaxtion.merchant.name';
+      case Sorter.Date:
+        return '_sort=dates.valueDate';
+      default:
+        return null;
+    }
   }
 }

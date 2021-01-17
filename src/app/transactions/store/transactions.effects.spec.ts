@@ -10,9 +10,12 @@ import {
   loadTransactionsSuccess,
   searchByPhrase,
 } from './transactions.actions';
-import { Transaction } from '../models';
+import { Sorter, Transaction } from '../models';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { selectSearchPhrase } from './transactions.selectors';
+import {
+  selectCurrentSorter,
+  selectSearchPhrase,
+} from './transactions.selectors';
 
 describe('TransactionsEffects', () => {
   let store: MockStore<any>;
@@ -49,13 +52,15 @@ describe('TransactionsEffects', () => {
 
   describe('loadTransactions$', () => {
     const phrase = 'phrase';
+    const sorter = Sorter.Amount;
 
     beforeEach(() => {
       store.overrideSelector(selectSearchPhrase, phrase);
+      store.overrideSelector(selectCurrentSorter, sorter);
     });
 
     it(
-      'should load transactions based on the current search phrase',
+      'should load transactions based on the current search phrase and sorter',
       waitForAsync(() => {
         transactionsService.getTransactions.and.returnValue(of([]));
         actions$.next(loadTransactions());
@@ -63,7 +68,8 @@ describe('TransactionsEffects', () => {
         effects.loadTransactions$.subscribe(
           () =>
             expect(transactionsService.getTransactions).toHaveBeenCalledWith(
-              'phrase'
+              phrase,
+              sorter
             ),
           fail
         );

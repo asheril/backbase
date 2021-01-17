@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Transaction } from '../models';
+import { Sorter, Transaction } from '../models';
 
 export const loadTransactions = createAction(
   '[Transactions] Load Transactions'
@@ -17,4 +17,9 @@ export const loadTransactionsFailure = createAction(
 export const searchByPhrase = createAction(
   '[Transactions] Search By Phrase',
   props<{ phrase: string }>()
+);
+
+export const sortBySorter = createAction(
+  '[Transactions] Search By Sorter',
+  props<{ sorter: Sorter }>()
 );
