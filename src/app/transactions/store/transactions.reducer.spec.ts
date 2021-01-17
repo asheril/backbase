@@ -1,5 +1,8 @@
 import { reducer, initialState } from './transactions.reducer';
-import { loadTransactionsSuccess } from './transactions.actions';
+import {
+  loadTransactionsSuccess,
+  searchByPhrase,
+} from './transactions.actions';
 import { Transaction } from '../models';
 
 describe('Transactions Reducer', () => {
@@ -20,7 +23,18 @@ describe('Transactions Reducer', () => {
 
       const result = reducer(initialState, action);
 
-      expect(result).toEqual({ transactions });
+      expect(result).toEqual({ ...initialState, transactions });
+    });
+  });
+
+  describe('searchByPhrase action', () => {
+    it('should store search phrase', () => {
+      const phrase = 'phrase';
+      const action = searchByPhrase({ phrase });
+
+      const result = reducer(initialState, action);
+
+      expect(result).toEqual({ ...initialState, phrase });
     });
   });
 });

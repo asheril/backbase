@@ -1,5 +1,6 @@
 import * as fromTransactions from './transactions.reducer';
 import {
+  selectSearchPhrase,
   selectTransactions,
   selectTransactionsState,
 } from './transactions.selectors';
@@ -11,7 +12,7 @@ describe('Transactions Selectors', () => {
       [fromTransactions.transactionsFeatureKey]: fromTransactions.initialState,
     });
 
-    expect(result).toEqual({ transactions: [] });
+    expect(result).toEqual(fromTransactions.initialState);
   });
 
   it('should select transactions', () => {
@@ -24,5 +25,17 @@ describe('Transactions Selectors', () => {
     });
 
     expect(result).toEqual(transactions);
+  });
+
+  it('should select search phrase', () => {
+    const phrase = 'phrase';
+    const result = selectSearchPhrase({
+      [fromTransactions.transactionsFeatureKey]: {
+        ...fromTransactions.initialState,
+        phrase,
+      },
+    });
+
+    expect(result).toEqual(phrase);
   });
 });

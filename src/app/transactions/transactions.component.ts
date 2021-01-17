@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { State } from '../reducers';
 import { Store } from '@ngrx/store';
-import { loadTransactions } from './store/transactions.actions';
-import { selectTransactions } from './store/transactions.selectors';
+import { loadTransactions, searchByPhrase } from './store/transactions.actions';
+import {
+  selectSearchPhrase,
+  selectTransactions,
+} from './store/transactions.selectors';
 
 @Component({
   selector: 'app-transactions',
@@ -12,10 +15,15 @@ import { selectTransactions } from './store/transactions.selectors';
 })
 export class TransactionsComponent implements OnInit {
   transactions$ = this.store.select(selectTransactions);
+  searchPhrase$ = this.store.select(selectSearchPhrase);
 
   constructor(private store: Store<State>) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadTransactions());
+  }
+
+  searchByPhrase(phrase: string): void {
+    this.store.dispatch(searchByPhrase({ phrase }));
   }
 }

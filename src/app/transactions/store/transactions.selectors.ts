@@ -9,3 +9,8 @@ export const selectTransactions = createSelector(
   selectTransactionsState,
   ({ transactions }: fromTransactions.State) => transactions
 );
+
+export const selectSearchPhrase = createSelector(
+  selectTransactionsState,
+  ({ phrase }: fromTransactions.State) => phrase
+);

@@ -13,3 +13,8 @@ export const loadTransactionsSuccess = createAction(
 export const loadTransactionsFailure = createAction(
   '[Transactions] Load Transactions Failure'
 );
+
+export const searchByPhrase = createAction(
+  '[Transactions] Search By Phrase',
+  props<{ phrase: string }>()
+);

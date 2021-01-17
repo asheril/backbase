@@ -1,3 +1,8 @@
+<app-search-input
+  [phrase]="searchPhrase$ | async"
+  (changed)="searchByPhrase($event)"
+></app-search-input>
+
 <app-transactions-list
   [transactions]="transactions$ | async"
 ></app-transactions-list>

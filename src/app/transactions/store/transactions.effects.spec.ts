@@ -1,6 +1,6 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable, of, ReplaySubject, throwError } from 'rxjs';
+import { of, ReplaySubject, throwError } from 'rxjs';
 
 import { TransactionsEffects } from './transactions.effects';
 import { TransactionsService } from '../services/transactions/transactions.service';
@@ -8,10 +8,14 @@ import {
   loadTransactions,
   loadTransactionsFailure,
   loadTransactionsSuccess,
+  searchByPhrase,
 } from './transactions.actions';
 import { Transaction } from '../models';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { selectSearchPhrase } from './transactions.selectors';
 
 describe('TransactionsEffects', () => {
+  let store: MockStore<any>;
   let actions$: ReplaySubject<any>;
   let effects: TransactionsEffects;
   let transactionsService: jasmine.SpyObj<TransactionsService>;
@@ -20,6 +24,7 @@ describe('TransactionsEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         TransactionsEffects,
+        provideMockStore(),
         provideMockActions(() => actions$),
         {
           provide: TransactionsService,
@@ -30,6 +35,7 @@ describe('TransactionsEffects', () => {
       ],
     });
 
+    store = TestBed.inject(MockStore);
     actions$ = new ReplaySubject();
     effects = TestBed.inject(TransactionsEffects);
     transactionsService = TestBed.inject(
@@ -42,28 +48,70 @@ describe('TransactionsEffects', () => {
   });
 
   describe('loadTransactions$', () => {
-    it('should dispatch loadTransactionsSuccess on success', async(() => {
-      const transactions = [<Transaction>{}];
-      transactionsService.getTransactions.and.returnValue(of(transactions));
-      actions$.next(loadTransactions());
+    const phrase = 'phrase';
 
-      effects.loadTransactions$.subscribe(
-        (action) =>
-          expect(action).toEqual(loadTransactionsSuccess({ transactions })),
-        fail
-      );
-    }));
+    beforeEach(() => {
+      store.overrideSelector(selectSearchPhrase, phrase);
+    });
 
-    it('should dispatch loadTransactionsFailure on error', async(() => {
-      transactionsService.getTransactions.and.returnValue(
-        throwError(new Error('error'))
-      );
-      actions$.next(loadTransactions());
+    it(
+      'should load transactions based on the current search phrase',
+      waitForAsync(() => {
+        transactionsService.getTransactions.and.returnValue(of([]));
+        actions$.next(loadTransactions());
 
-      effects.loadTransactions$.subscribe(
-        (action) => expect(action).toEqual(loadTransactionsFailure()),
-        fail
-      );
-    }));
+        effects.loadTransactions$.subscribe(
+          () =>
+            expect(transactionsService.getTransactions).toHaveBeenCalledWith(
+              'phrase'
+            ),
+          fail
+        );
+      })
+    );
+
+    it(
+      'should dispatch loadTransactionsSuccess on success',
+      waitForAsync(() => {
+        const transactions = [<Transaction>{}];
+        transactionsService.getTransactions.and.returnValue(of(transactions));
+        actions$.next(loadTransactions());
+
+        effects.loadTransactions$.subscribe(
+          (action) =>
+            expect(action).toEqual(loadTransactionsSuccess({ transactions })),
+          fail
+        );
+      })
+    );
+
+    it(
+      'should dispatch loadTransactionsFailure on error',
+      waitForAsync(() => {
+        transactionsService.getTransactions.and.returnValue(
+          throwError(new Error('error'))
+        );
+        actions$.next(loadTransactions());
+
+        effects.loadTransactions$.subscribe(
+          (action) => expect(action).toEqual(loadTransactionsFailure()),
+          fail
+        );
+      })
+    );
+  });
+
+  describe('searchByPhrase$', () => {
+    it(
+      'should dispatch loadTransactions',
+      waitForAsync(() => {
+        actions$.next(searchByPhrase({ phrase: 'phrase' }));
+
+        effects.searchByPhrase$.subscribe(
+          (action) => expect(action).toEqual(loadTransactions()),
+          fail
+        );
+      })
+    );
   });
 });

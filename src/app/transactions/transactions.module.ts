@@ -8,12 +8,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { TransactionsEffects } from './store/transactions.effects';
 import { TransactionsListComponent } from './components/transactions-list/transactions-list.component';
 import { TransactionsListRowComponent } from './components/transactions-list-row/transactions-list-row.component';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     TransactionsComponent,
     TransactionsListComponent,
     TransactionsListRowComponent,
+    SearchInputComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { TransactionsListRowComponent } from './components/transactions-list-row
       fromTransactions.reducer
     ),
     EffectsModule.forFeature([TransactionsEffects]),
+    ReactiveFormsModule,
   ],
 })
 export class TransactionsModule {}
