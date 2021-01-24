@@ -3,6 +3,7 @@ import {
   selectCurrentBalance,
   selectSearchPhrase,
   selectTransactions,
+  selectTransactionsFilteredSorted,
   selectTransactionsState,
 } from './transactions.selectors';
 import { Transaction } from '../models';
@@ -26,6 +27,23 @@ describe('Transactions Selectors', () => {
     });
 
     expect(result).toEqual(transactions);
+  });
+
+  it('should select filtered transactions', () => {
+    const transactions = [
+      { merchant: { name: 'abc' } } as Transaction,
+      { merchant: { name: 'def' } } as Transaction,
+    ];
+    const result = selectTransactionsFilteredSorted({
+      [fromTransactions.transactionsFeatureKey]: {
+        ...fromTransactions.initialState,
+        transactions,
+        sorter: null,
+        phrase: 'abc',
+      },
+    });
+
+    expect(result).toEqual([{ merchant: { name: 'abc' } } as Transaction]);
   });
 
   it('should select search phrase', () => {

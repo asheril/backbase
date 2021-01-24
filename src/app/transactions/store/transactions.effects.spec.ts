@@ -8,7 +8,6 @@ import {
   loadTransactions,
   loadTransactionsFailure,
   loadTransactionsSuccess,
-  searchByPhrase,
 } from './transactions.actions';
 import { Sorter, Transaction } from '../models';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -60,17 +59,13 @@ describe('TransactionsEffects', () => {
     });
 
     it(
-      'should load transactions based on the current search phrase and sorter',
+      'should load transactions',
       waitForAsync(() => {
         transactionsService.getTransactions.and.returnValue(of([]));
         actions$.next(loadTransactions());
 
         effects.loadTransactions$.subscribe(
-          () =>
-            expect(transactionsService.getTransactions).toHaveBeenCalledWith(
-              phrase,
-              sorter
-            ),
+          () => expect(transactionsService.getTransactions).toHaveBeenCalled(),
           fail
         );
       })
@@ -79,7 +74,7 @@ describe('TransactionsEffects', () => {
     it(
       'should dispatch loadTransactionsSuccess on success',
       waitForAsync(() => {
-        const transactions = [<Transaction>{}];
+        const transactions = [{} as Transaction];
         transactionsService.getTransactions.and.returnValue(of(transactions));
         actions$.next(loadTransactions());
 
@@ -101,20 +96,6 @@ describe('TransactionsEffects', () => {
 
         effects.loadTransactions$.subscribe(
           (action) => expect(action).toEqual(loadTransactionsFailure()),
-          fail
-        );
-      })
-    );
-  });
-
-  describe('searchByPhrase$', () => {
-    it(
-      'should dispatch loadTransactions',
-      waitForAsync(() => {
-        actions$.next(searchByPhrase({ phrase: 'phrase' }));
-
-        effects.searchByPhrase$.subscribe(
-          (action) => expect(action).toEqual(loadTransactions()),
           fail
         );
       })

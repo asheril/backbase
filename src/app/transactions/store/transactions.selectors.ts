@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromTransactions from './transactions.reducer';
-import { Transaction } from '../models';
+import { Sorter, Transaction } from '../models';
 
 export const selectTransactionsState = createFeatureSelector<fromTransactions.State>(
   fromTransactions.transactionsFeatureKey
@@ -11,11 +11,6 @@ export const selectCurrentAccount = createSelector(
   ({ account }: fromTransactions.State) => account
 );
 
-export const selectTransactions = createSelector(
-  selectTransactionsState,
-  ({ transactions }: fromTransactions.State) => transactions
-);
-
 export const selectSearchPhrase = createSelector(
   selectTransactionsState,
   ({ phrase }: fromTransactions.State) => phrase
@@ -24,6 +19,44 @@ export const selectSearchPhrase = createSelector(
 export const selectCurrentSorter = createSelector(
   selectTransactionsState,
   ({ sorter }: fromTransactions.State) => sorter
+);
+
+export const selectTransactions = createSelector(
+  selectTransactionsState,
+  ({ transactions }: fromTransactions.State) => transactions
+);
+
+export const selectTransactionsFilteredSorted = createSelector(
+  selectTransactionsState,
+  selectSearchPhrase,
+  selectCurrentSorter,
+  (
+    { transactions }: fromTransactions.State,
+    phrase: string,
+    sorter: Sorter
+  ) => {
+    return transactions
+      .filter((transaction) =>
+        phrase
+          ? transaction.merchant.name
+              .toLowerCase()
+              .includes(phrase.toLowerCase())
+          : true
+      )
+      .sort((a, b) => {
+        switch (sorter) {
+          case Sorter.Amount:
+            return (
+              parseFloat(a.transaction.amountCurrency.amount) -
+              parseFloat(b.transaction.amountCurrency.amount)
+            );
+          case Sorter.Beneficiary:
+            return a.merchant.name.localeCompare(b.merchant.name);
+          case Sorter.Date:
+            return a.dates.valueDate - b.dates.valueDate;
+        }
+      });
+  }
 );
 
 export const selectCurrentBalance = createSelector(
