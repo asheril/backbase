@@ -12,6 +12,8 @@ import { SearchInputComponent } from './components/search-input/search-input.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { SortingBarComponent } from './components/sorting-bar/sorting-bar.component';
 import { SortingButtonComponent } from './components/sorting-button/sorting-button.component';
+import { NewTransactionFormComponent } from './components/new-transaction-form/new-transaction-form.component';
+import { NewTransactionComponent } from './components/new-transaction/new-transaction.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SortingButtonComponent } from './components/sorting-button/sorting-butt
     SearchInputComponent,
     SortingBarComponent,
     SortingButtonComponent,
+    NewTransactionFormComponent,
+    NewTransactionComponent,
   ],
   imports: [
     CommonModule,

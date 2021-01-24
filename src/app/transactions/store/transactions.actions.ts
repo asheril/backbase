@@ -23,3 +23,16 @@ export const sortBySorter = createAction(
   '[Transactions] Search By Sorter',
   props<{ sorter: Sorter }>()
 );
+
+export const addTransaction = createAction(
+  '[Transactions] Add Transaction',
+  props<{ transaction: Transaction }>()
+);
+
+export const addTransactionSuccess = createAction(
+  '[Transactions] Add Transaction Success'
+);
+
+export const addTransactionFailure = createAction(
+  '[Transactions] Add Transaction Failure'
+);

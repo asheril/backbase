@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import {
   catchError,
+  concatMapTo,
   map,
   mapTo,
   switchMap,
@@ -14,6 +15,8 @@ import * as TransactionsActions from './transactions.actions';
 import { TransactionsService } from '../services/transactions/transactions.service';
 import { Action, Store } from '@ngrx/store';
 import {
+  addTransactionFailure,
+  addTransactionSuccess,
   loadTransactions,
   loadTransactionsFailure,
   loadTransactionsSuccess,
@@ -66,6 +69,20 @@ export class TransactionsEffects {
       return this.actions$.pipe(
         ofType(TransactionsActions.sortBySorter),
         mapTo(loadTransactions())
+      );
+    }
+  );
+
+  addTransaction$ = createEffect(
+    (): Observable<Action> => {
+      return this.actions$.pipe(
+        ofType(TransactionsActions.addTransaction),
+        switchMap(({ transaction }) =>
+          this.transactionsService.addTransaction(transaction).pipe(
+            concatMapTo([addTransactionSuccess(), loadTransactions()]),
+            catchError(() => of(addTransactionFailure()))
+          )
+        )
       );
     }
   );

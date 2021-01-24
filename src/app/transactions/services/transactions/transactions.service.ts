@@ -17,6 +17,13 @@ export class TransactionsService {
     );
   }
 
+  addTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.httpClient.post<Transaction>(transactionsUrl, {
+      ...transaction,
+      id: Date.now(),
+    });
+  }
+
   private urlWithFiltering(phrase: string, sorter: Sorter): string {
     const fragments = [
       this.phraseFragment(phrase),

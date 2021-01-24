@@ -1,16 +1,18 @@
 import { createReducer, on } from '@ngrx/store';
 import * as TransactionsActions from './transactions.actions';
-import { Sorter, Transaction } from '../models';
+import { Account, Sorter, Transaction } from '../models';
 
 export const transactionsFeatureKey = 'transactions';
 
 export interface State {
+  account: Account;
   transactions: Transaction[];
   phrase: string;
   sorter: Sorter;
 }
 
 export const initialState: State = {
+  account: { name: 'Free Checking', id: '4692' },
   transactions: [],
   phrase: null,
   sorter: null,

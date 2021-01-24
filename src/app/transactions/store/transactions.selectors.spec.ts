@@ -1,5 +1,6 @@
 import * as fromTransactions from './transactions.reducer';
 import {
+  selectCurrentBalance,
   selectSearchPhrase,
   selectTransactions,
   selectTransactionsState,
@@ -16,7 +17,7 @@ describe('Transactions Selectors', () => {
   });
 
   it('should select transactions', () => {
-    const transactions = [<Transaction>{}];
+    const transactions = [{} as Transaction];
     const result = selectTransactions({
       [fromTransactions.transactionsFeatureKey]: {
         ...fromTransactions.initialState,
@@ -37,5 +38,17 @@ describe('Transactions Selectors', () => {
     });
 
     expect(result).toEqual(phrase);
+  });
+
+  it('should select current balance', () => {
+    const result = selectCurrentBalance.projector([
+      { transaction: { amountCurrency: { amount: 5 } } },
+      { transaction: { amountCurrency: { amount: 10 } } },
+      { transaction: { amountCurrency: { amount: -15 } } },
+      { transaction: { amountCurrency: { amount: -10 } } },
+      { transaction: { amountCurrency: { amount: 15 } } },
+    ]);
+
+    expect(result).toEqual(5);
   });
 });
