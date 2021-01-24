@@ -4,7 +4,15 @@ $font-family: Kanit, sans-serif;
 // colors
 $primary-color: #17374f;
 $secondary-color: #afb8bd;
-$link-color: #8cbedc;
+$window-title-color: #0c8397;
+$white-color: #ffffff;
+$orange-color: #ee7033;
+$green-color: #12a580;
+$pink-color: #d51271;
+$red-color: #c12020;
+$blue-color: #1180aa;
+$yellow-color: #fbbb1b;
+$black-color: #000000;
 
 // sizes
 $font-sizes: (
@@ -21,6 +29,9 @@ $font-sizes: (
         line-height: 36px
     )
 );
+
+// shadows
+$box-shadow: 0 4px 32px 0 rgba($black-color, 0.32);
 
 // spacing
 $spacing: 8;

@@ -1,18 +1,25 @@
-<app-search-input
-  [phrase]="searchPhrase$ | async"
-  (changed)="searchByPhrase($event)"
-></app-search-input>
-
-<app-sorting-bar
-  [activeId]="currentSorter$ | async"
-  (changed)="searchBySorter($event)"
+<app-window-view
+  title="Recent Transactions"
+  i18n-title="@@TRANSACTION_LIST_TITLE"
 >
-  <app-sorting-button [id]="sorter.Date">date</app-sorting-button>
-  <app-sorting-button [id]="sorter.Beneficiary">beneficiary</app-sorting-button>
-  <app-sorting-button [id]="sorter.Amount">amount</app-sorting-button>
-</app-sorting-bar>
+  <app-search-input
+    [phrase]="searchPhrase$ | async"
+    (changed)="searchByPhrase($event)"
+  ></app-search-input>
 
-<app-transactions-list-row
-  *ngFor="let transaction of transactions$ | async"
-  [transaction]="transaction"
-></app-transactions-list-row>
+  <app-sorting-bar
+    [activeId]="currentSorter$ | async"
+    (changed)="searchBySorter($event)"
+  >
+    <app-sorting-button [id]="sorter.Date">date</app-sorting-button>
+    <app-sorting-button [id]="sorter.Beneficiary"
+      >beneficiary</app-sorting-button
+    >
+    <app-sorting-button [id]="sorter.Amount">amount</app-sorting-button>
+  </app-sorting-bar>
+
+  <app-transactions-list-row
+    *ngFor="let transaction of transactions$ | async"
+    [transaction]="transaction"
+  ></app-transactions-list-row>
+</app-window-view>

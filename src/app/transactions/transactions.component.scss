@@ -1,9 +1,23 @@
+@import "functions";
+@import "variables";
+
 :host {
-  display: block;
+  display: flex;
   min-height: 100vh;
+  padding: spacing(8) spacing(16);
+
   background-image: url("/assets/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: left bottom;
+
+  .new-transaction {
+    flex: 1 0 0;
+  }
+
+  .transaction-list {
+    flex: 2 0 0;
+    margin-left: spacing(2);
+  }
 }

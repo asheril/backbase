@@ -1,14 +1,23 @@
 @import "mixins";
+@import "functions";
 @import "variables";
 
 :host {
   display: flex;
   flex-flow: column;
+  box-shadow: $box-shadow;
+  background-color: $white-color;
 
   .title {
-    @include font-size(medium);
+    @include font-size(small);
+    color: $white-color;
+    font-weight: 300;
+    text-align: center;
+    background-color: $window-title-color;
+    padding: spacing(0.5);
   }
 
   .content {
+    padding: spacing(2);
   }
 }
