@@ -14,6 +14,7 @@ import { SortingBarComponent } from './components/sorting-bar/sorting-bar.compon
 import { SortingButtonComponent } from './components/sorting-button/sorting-button.component';
 import { NewTransactionFormComponent } from './components/new-transaction-form/new-transaction-form.component';
 import { NewTransactionComponent } from './components/new-transaction/new-transaction.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NewTransactionComponent } from './components/new-transaction/new-transa
     ),
     EffectsModule.forFeature([TransactionsEffects]),
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class TransactionsModule {}

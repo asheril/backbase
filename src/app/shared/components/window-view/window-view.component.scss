@@ -1,0 +1,14 @@
+@import "mixins";
+@import "variables";
+
+:host {
+  display: flex;
+  flex-flow: column;
+
+  .title {
+    @include font-size(medium);
+  }
+
+  .content {
+  }
+}
