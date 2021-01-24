@@ -215,6 +215,25 @@
         }
       },
       "id": 1611508974033
+    },
+    {
+      "merchant": {
+        "name": "tea",
+        "accountNumber": ""
+      },
+      "categoryCode": "#12a580",
+      "dates": {
+        "valueDate": 1611511565366
+      },
+      "transaction": {
+        "type": "",
+        "creditDebitIndicator": "",
+        "amountCurrency": {
+          "amount": "-123",
+          "currencyCode": "EUR"
+        }
+      },
+      "id": 1611511565377
     }
   ]
 }

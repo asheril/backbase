@@ -1,0 +1,12 @@
+@import "functions";
+@import "variables";
+
+:host {
+  display: block;
+  padding: spacing(2) spacing(6);
+  border-bottom: 2px solid $orange-color;
+
+  .logo {
+    height: spacing(4);
+  }
+}
