@@ -9,4 +9,23 @@ import { Transaction } from '../../models';
 })
 export class TransactionsListRowComponent {
   @Input() transaction: Transaction;
+
+  get date(): string {
+    return new Date(this.transaction.dates.valueDate).toLocaleString('en', {
+      month: 'short',
+      day: '2-digit',
+    });
+  }
+
+  get merchantName(): string {
+    return this.transaction.merchant.name;
+  }
+
+  get paymentType(): string {
+    return this.transaction.transaction.type;
+  }
+
+  get amount(): string {
+    return this.transaction.transaction.amountCurrency.amount;
+  }
 }

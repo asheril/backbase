@@ -1,1 +1,6 @@
-<div>{{ transaction | json }}</div>
+<div class="date">{{ date }} {{ transaction.dates.valueDate }}</div>
+<div class="merchant-name-payment-type">
+  <div class="merchant-name">{{ merchantName }}</div>
+  <div class="payment-type">{{ paymentType }}</div>
+</div>
+<div class="amount">{{ amount }}</div>

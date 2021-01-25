@@ -1,0 +1,18 @@
+@import "functions";
+@import "variables";
+
+:host {
+  display: flex;
+  padding: spacing(0.5) spacing(1);
+  align-items: center;
+
+  border: 1px solid black;
+  margin-top: -1px;
+
+  .merchant-name-payment-type {
+    display: flex;
+    flex: 1;
+    flex-flow: column;
+    margin: 0 spacing(2);
+  }
+}
