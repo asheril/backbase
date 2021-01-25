@@ -9,6 +9,7 @@
 
   <app-sorting-bar
     [activeId]="currentSorter$ | async"
+    [asc]="currentAsc$ | async"
     (changed)="searchBySorter($event)"
   >
     <app-sorting-button [id]="sorter.Date">date</app-sorting-button>

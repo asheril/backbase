@@ -15,5 +15,6 @@ import { Sorter } from '../../models';
 })
 export class SortingBarComponent {
   @Input() activeId: string;
+  @Input() asc: boolean;
   @Output() changed = new EventEmitter<Sorter>();
 }

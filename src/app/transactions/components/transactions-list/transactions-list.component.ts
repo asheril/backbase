@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
+  selectCurrentAsc,
   selectCurrentSorter,
   selectSearchPhrase,
   selectTransactionsFilteredSorted,
@@ -23,6 +24,7 @@ export class TransactionsListComponent implements OnInit {
   transactions$ = this.store.select(selectTransactionsFilteredSorted);
   searchPhrase$ = this.store.select(selectSearchPhrase);
   currentSorter$ = this.store.select(selectCurrentSorter);
+  currentAsc$ = this.store.select(selectCurrentAsc);
   sorter = Sorter;
 
   constructor(private store: Store<State>) {}

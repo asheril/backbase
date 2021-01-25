@@ -9,13 +9,15 @@ export interface State {
   transactions: Transaction[];
   phrase: string;
   sorter: Sorter;
+  asc: boolean;
 }
 
 export const initialState: State = {
   account: { name: 'Free Checking', id: '4692' },
   transactions: [],
   phrase: null,
-  sorter: null,
+  sorter: Sorter.Date,
+  asc: true,
 };
 
 export const reducer = createReducer(
@@ -30,6 +32,7 @@ export const reducer = createReducer(
   })),
   on(TransactionsActions.sortBySorter, (state, { sorter }) => ({
     ...state,
+    asc: state.sorter === sorter ? !state.asc : state.asc,
     sorter,
   }))
 );

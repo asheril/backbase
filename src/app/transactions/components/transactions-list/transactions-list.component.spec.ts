@@ -11,6 +11,7 @@ import { SortingBarComponent } from '../sorting-bar/sorting-bar.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Sorter, Transaction } from '../../models';
 import {
+  selectCurrentAsc,
   selectCurrentSorter,
   selectSearchPhrase,
   selectTransactionsFilteredSorted,
@@ -44,6 +45,7 @@ describe('TransactionsListComponent', () => {
     store.overrideSelector(selectTransactionsFilteredSorted, transactions);
     store.overrideSelector(selectSearchPhrase, 'phrase');
     store.overrideSelector(selectCurrentSorter, Sorter.Amount);
+    store.overrideSelector(selectCurrentAsc, true);
     spyOn(store, 'dispatch');
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -16,6 +16,10 @@ export class SortingButtonComponent {
     return this.id === this.host.activeId;
   }
 
+  get isAsc(): boolean {
+    return this.host.asc;
+  }
+
   click(): void {
     this.host.changed.emit(this.id);
   }

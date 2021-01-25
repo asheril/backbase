@@ -21,6 +21,11 @@ export const selectCurrentSorter = createSelector(
   ({ sorter }: fromTransactions.State) => sorter
 );
 
+export const selectCurrentAsc = createSelector(
+  selectTransactionsState,
+  ({ asc }: fromTransactions.State) => asc
+);
+
 export const selectTransactions = createSelector(
   selectTransactionsState,
   ({ transactions }: fromTransactions.State) => transactions
@@ -30,10 +35,12 @@ export const selectTransactionsFilteredSorted = createSelector(
   selectTransactionsState,
   selectSearchPhrase,
   selectCurrentSorter,
+  selectCurrentAsc,
   (
     { transactions }: fromTransactions.State,
     phrase: string,
-    sorter: Sorter
+    sorter: Sorter,
+    asc: boolean
   ) => {
     return transactions
       .filter((transaction) =>
@@ -44,6 +51,9 @@ export const selectTransactionsFilteredSorted = createSelector(
           : true
       )
       .sort((a, b) => {
+        if (!asc) {
+          [a, b] = [b, a];
+        }
         switch (sorter) {
           case Sorter.Amount:
             return (

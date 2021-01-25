@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TransactionsListRowComponent } from './transactions-list-row.component';
+import { Transaction } from '../../models';
 
 describe('TransactionsListRowComponent', () => {
   let component: TransactionsListRowComponent;
@@ -14,6 +15,11 @@ describe('TransactionsListRowComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TransactionsListRowComponent);
     component = fixture.componentInstance;
+    component.transaction = {
+      merchant: {},
+      dates: {},
+      transaction: { amountCurrency: {} },
+    } as Transaction;
     fixture.detectChanges();
   });
 
