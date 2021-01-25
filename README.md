@@ -14,6 +14,7 @@ Remarks:
 * handling dates deserves dedicated components
 * at some point I've stopped adding unit tests
 * more styling needs to be applied
+* the original json mock is corrupted and it influences the app
 
 #### In order to run the mock server and the application please execute:
 `npm run start`
