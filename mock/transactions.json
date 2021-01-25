@@ -1,6 +1,5 @@
 {
-  "data": [
-    {
+  "data": [{
       "categoryCode": "#12a580",
       "dates": {
         "valueDate": 1600493600000
@@ -17,8 +16,7 @@
         "name": "Backbase",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#12a580",
       "dates": {
         "valueDate": 1600387200000
@@ -35,8 +33,7 @@
         "name": "The Tea Lounge",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#d51271",
       "dates": {
         "valueDate": "2020-09-19"
@@ -53,8 +50,7 @@
         "name": "Texaco",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#12a580",
       "dates": {
         "valueDate": 1600300800000
@@ -71,8 +67,7 @@
         "name": "The Tea Lounge",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#c12020",
       "dates": {
         "valueDate": 1600370800000
@@ -89,8 +84,7 @@
         "name": "Amazon Online Store",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#c89616",
       "dates": {
         "valueDate": 1600214400000
@@ -107,8 +101,7 @@
         "name": "7-Eleven",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#e25a2c",
       "dates": {
         "valueDate": 1476721442000
@@ -124,8 +117,7 @@
         "name": "H&M Online Store",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#1180aa",
       "dates": {
         "valueDate": "2020-09-15"
@@ -142,8 +134,7 @@
         "name": "Jerry Hildreth",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#1180aa",
       "dates": {
         "valueDate": 1600041600000
@@ -160,8 +151,7 @@
         "name": "Lawrence Pearson",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#12a580",
       "dates": {
         "valueDate": 1599955200000
@@ -178,8 +168,7 @@
         "name": "Whole Foods",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
+    }, {
       "categoryCode": "#fbbb1b",
       "dates": {
         "valueDate": 1599868800000
@@ -196,44 +185,6 @@
         "name": "Southern Electric Company",
         "accountNumber": "SI64397745065188826"
       }
-    },
-    {
-      "merchant": {
-        "name": "tea",
-        "accountNumber": ""
-      },
-      "categoryCode": "#12a580",
-      "dates": {
-        "valueDate": 1611508974031
-      },
-      "transaction": {
-        "type": "",
-        "creditDebitIndicator": "",
-        "amountCurrency": {
-          "amount": "-123",
-          "currencyCode": "EUR"
-        }
-      },
-      "id": 1611508974033
-    },
-    {
-      "merchant": {
-        "name": "tea",
-        "accountNumber": ""
-      },
-      "categoryCode": "#12a580",
-      "dates": {
-        "valueDate": 1611511565366
-      },
-      "transaction": {
-        "type": "",
-        "creditDebitIndicator": "",
-        "amountCurrency": {
-          "amount": "-123",
-          "currencyCode": "EUR"
-        }
-      },
-      "id": 1611511565377
     }
   ]
 }

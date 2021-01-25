@@ -5,6 +5,7 @@
 :host {
   display: flex;
   flex-flow: column;
+  flex: 1 0 0;
   box-shadow: $box-shadow;
   background-color: $white-color;
 

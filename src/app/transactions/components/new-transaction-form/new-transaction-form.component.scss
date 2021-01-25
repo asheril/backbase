@@ -1,0 +1,15 @@
+@import "mixins";
+@import "functions";
+@import "variables";
+
+:host {
+  display: flex;
+  flex-flow: column;
+
+  .submit {
+    align-self: flex-end;
+    color: $white-color;
+    background-color: $orange-color;
+    padding: spacing(0.5) spacing(6);
+  }
+}

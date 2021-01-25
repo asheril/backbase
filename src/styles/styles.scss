@@ -11,3 +11,22 @@ body {
   @include font-size(medium);
   font-family: $font-family;
 }
+
+label {
+  @include font-size(small);
+  font-weight: 500;
+  margin-bottom: spacing(0.5);
+}
+
+input {
+  @include font-size(small);
+  font-weight: 400;
+  margin-bottom: spacing(1.5);
+}
+
+button {
+  @include font-size(small);
+  border-radius: $border-radius;
+  border: none;
+  cursor: pointer;
+}
